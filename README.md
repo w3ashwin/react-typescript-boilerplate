@@ -1,4 +1,4 @@
-React Typescript 4 Boilerplate
+React Typescript Boilerplate
 ===========
 
 > Webpack 4 boilerplate with Babel, SASS, React 16.2, React router v4 on board
