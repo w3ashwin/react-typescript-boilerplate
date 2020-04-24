@@ -8,7 +8,7 @@ interface ITodoModel {
 
 export const initialState: ITodoModel = {
   count: 2,
-  list: ["Do the laundry", "Do the dishes"]
+  list: ["Hello", "World"]
 };
 
 export const todoReducer = (state: ITodoModel = initialState, action: MyTypes.RootAction) => {
