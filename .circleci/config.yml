@@ -11,11 +11,9 @@ jobs:
           install-yarn: true
           node-version: 12.16.1
       - run: node --version
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn test
-            - run: yarn build
+      - run: yarn install
+      - run: yarn test
+      - run: yarn build
 workflows:
   build-and-test:
     jobs:
