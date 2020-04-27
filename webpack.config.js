@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Is the current build a development build
 const IS_DEV = process.env.NODE_ENV === 'dev';
@@ -17,9 +18,7 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + '/public',
-    publicPath: 'build/',
-    filename: '[name].bundle.js',
+    publicPath: '/',
   },
 
   devtool: 'source-map',
@@ -72,27 +71,27 @@ module.exports = {
       hash: true,
       title: 'Hello World',
       files: {
-        css: ['[name].bundle.css'],
-        js: ['[name].bundle.js'],
+        css: ['[name].[hash].bundle.css'],
+        js: ['[name].[hash].bundle.js'],
         chunks: {
           head: {
             entry: '',
-            css: '[name].bundle.css',
+            css: '[name].[hash].bundle.css',
           },
           main: {
-            entry: '[name].bundle.js',
+            entry: '[name].[hash].bundle.js',
             css: [],
           },
         },
       },
     }),
 
-    // new ExtractTextPlugin({
-    //   filename: '[name].bundle.css',
-    //   disable: IS_DEV,
-    //   allChunks: true,
-    //   ignoreOrder: false,
-    // }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+    }),
 
     // new webpack.ProvidePlugin({
     //   $: 'jquery',
@@ -108,35 +107,23 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'ts-loader',
-          },
-        ],
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       // STYLES
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: IS_DEV,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(scss)$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           {
             // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader',
+            loader: IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
           },
           {
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
             loader: 'css-loader',
+            options: {
+              sourceMap: IS_DEV,
+            },
           },
           {
             // Loader for webpack to process CSS with PostCSS
@@ -155,11 +142,11 @@ module.exports = {
       },
       // IMAGES
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: {
           loader: 'file-loader',
           options: {
-            name: '[hash].[ext]',
+            name: '[name].[hash].[ext]',
             publicPath: '/',
           },
         },
@@ -167,7 +154,7 @@ module.exports = {
 
       // FONTS
       {
-        test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: 'file-loader',
       },
 
