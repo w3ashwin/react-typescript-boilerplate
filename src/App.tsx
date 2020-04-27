@@ -1,11 +1,18 @@
-import * as React from "react";
-import TodoContainer from "./containers/TodoContainer";
+import * as React from 'react';
+import logo from './assets/images/logo.svg';
+import TodoContainer from './containers/TodoContainer';
+import './assets/styles/components/App.scss';
 
 export const App: React.FC<{}> = () => {
   return (
-    <>
-      <h1>React Redux Typescript</h1>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="logo" alt="logo" />
+        <p>
+          Simple Todo
+        </p>
       <TodoContainer />
-    </>
+      </header>
+    </div>
   );
 };
