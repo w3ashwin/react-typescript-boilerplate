@@ -8,10 +8,8 @@ export const App: React.FC<{}> = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="logo" alt="logo" />
-        <p>
-          Simple Todo
-        </p>
-      <TodoContainer />
+        <p>Simple Todo</p>
+        <TodoContainer />
       </header>
     </div>
   );
