@@ -1,5 +1,5 @@
-import * as MyTypes from "MyTypes";
-import { actionTypes } from "../actions/";
+import * as MyTypes from 'MyTypes';
+import { actionTypes } from '../actions';
 
 interface ITodoModel {
   count: number;
@@ -8,16 +8,19 @@ interface ITodoModel {
 
 export const initialState: ITodoModel = {
   count: 2,
-  list: ["Hello", "World"]
+  list: ['Hello', 'World'],
 };
 
-export const todoReducer = (state: ITodoModel = initialState, action: MyTypes.RootAction) => {
+export const todoReducer = (
+  state: ITodoModel = initialState,
+  action: MyTypes.RootAction
+) => {
   switch (action.type) {
     case actionTypes.ADD: {
       return {
         ...state,
         count: state.count + 1,
-        list: [...state.list, action.payload]
+        list: [...state.list, action.payload],
       };
     }
     case actionTypes.DELETE: {
@@ -28,7 +31,7 @@ export const todoReducer = (state: ITodoModel = initialState, action: MyTypes.Ro
       return {
         ...state,
         count: state.count - 1,
-        list: newList
+        list: newList,
       };
     }
     default:
