@@ -11,11 +11,11 @@
     "coverage": "jest --coverage",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
-    "pretest": "yarn lint"
+    "ci": "yarn test && yarn lint && yarn build"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": "yarn ci"
     }
   },
   "author": "Aswin Raj",
