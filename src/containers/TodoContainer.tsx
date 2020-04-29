@@ -55,9 +55,9 @@ TodoContainerState> {
       todoJSX = todoList.map((item, idx) => {
         const key = `key-${idx}`;
         return (<TodoItem 
-          item={item}
-          key={key}
-          idx={idx}
+          item={item} 
+          key={key} 
+          idx={idx} 
           handleDelete={this.handleDeleteButtonClick}
         />);
       });
@@ -68,7 +68,7 @@ TodoContainerState> {
         {todoJSX}
         <input 
           onChange={this.handleTextChange} 
-          placeholder="New To Do Here"
+          placeholder="New To Do Here" 
           value={todoInput}
         />
         <button type="button" onClick={this.handleButtonClick}>

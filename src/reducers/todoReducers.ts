@@ -12,9 +12,8 @@ export const initialState: ITodoModel = {
 };
 
 export const todoReducer = (
-  state: ITodoModel = initialState,
-  action: MyTypes.RootAction
-) => {
+  state: ITodoModel = initialState, 
+  action: MyTypes.RootAction) => {
   switch (action.type) {
     case actionTypes.ADD: {
       return {
